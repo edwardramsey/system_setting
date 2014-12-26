@@ -1,16 +1,23 @@
-macvim-setting
+system-setting
 ==============
 ##Intro
+a file prepared for my work environment
 
-This is my .vimrc setting which is suitable for my C++ programming environment.
+I prefer using MacOS and a linux in Digital Ocean together.
+
+## Linux setting file 
+linux_setting.sh is working for ubuntu and CentOS 
+
+I hope it could install vim, C++, python, mysql and nginx automactically
+
+##.vimrc配置 .vimrc Setting
+.vimrc setting is suitable for my Mac C++ programming environment.
 
 这是我的.vimrc 配置文件，主要用来做C++方面的一些开发，弄了一天多，现在顺眼多了。
 
-##配置 Setting
-
 使用平台：
 
-- MacOSX Mavericks 10.9.4
+- MacOSX Mavericks 10.10.1
 - xcode command line tools
 - latest MacVim(7.4)
 
