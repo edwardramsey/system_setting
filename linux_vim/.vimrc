@@ -56,12 +56,7 @@ set hlsearch
 set tabstop=4  
 set shiftwidth=4  
   
-" set background=dark
-"set background=light
-
-"colorscheme jellybeans
-" colorscheme solarized
-"colorscheme monokai
+colorscheme monokai
 
 "总是显示状态栏
 set laststatus=2
@@ -90,7 +85,7 @@ call vundle#begin()
 
 "bundle 包管理
 Plugin 'gmarik/Vundle.vim'
-
+"目录
 Plugin 'scrooloose/nerdtree'
 "基础库
 Plugin 'L9'
@@ -106,15 +101,13 @@ Plugin 'Lokaltog/vim-powerline'
 Plugin 'kien/ctrlp.vim'
 "Markdown插件
 Plugin 'plasticboy/vim-markdown'
+" for python
+Plugin 'davidhalter/jedi-vim'
 
 call vundle#end()
 
-
 filetype plugin indent on
  
-
-
-
 "设置路径
 "let &path.="/usr/local/include, /Users/edward/asiainfo_program/include, /Users/edward/asiainfo_program/app, /Users/edward/asiainfo_program/public, /Users/edward/asiainfo_program/dbe_v2"
 
@@ -161,14 +154,6 @@ func SetTitle()
  		call setline(1,"#!/usr/bin/env python")
  		call append(line("."),"#coding=utf-8")
  		call append(line(".")+1, "")
- 	 else 
- 		call setline(1, "/*************************************************************") 
- 		call append(line("."), "    > File Name: ".expand("%")) 
- 		call append(line(".")+1, "    > Author: Edward") 
- 		call append(line(".")+2, "    > Mail: chenyq6@asiainfo.com ") 
- 		call append(line(".")+3, "    > Created Time: ".strftime("%c")) 
- 		call append(line(".")+4, " ****************************************************/")
-		call append(line(".")+5, "")
  	 endif
 
 "新建文件后，自动定位到文件末尾

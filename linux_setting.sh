@@ -15,24 +15,26 @@ fi
 $PKG_MANAGER update -y
 $PKG_MANAGER upgrage -y
 
-echo "install vim \n" > $LOG_FILE
+echo "install vim \n" >> $LOG_FILE
 $PKG_MANAGER install vim -y
 
 # use own .vimrc setting
 if [ -f ~/.vimrc ]; then 
-	echo "exist .vimrc \n" >$LOG_FILE
+	echo "exist .vimrc \n" >>$LOG_FILE
 else
 	git clone https://github.com/edwardramsey/system-setting/linux_vim/.vimrc 
 	mv ~/system-setting/linux_vim/.vimrc ~/
 	rm -rf system-setting/
-	echo "istall .vimrc" >$LOG_FILE
+	echo "already istall .vimrc \n" >>$LOG_FILE
 fi
 
 # use vundle to manage vim plugin
 if [ ! -d ~/.vim/bundle ]; then
 	mkdir -p ~/.vim/bundle
-	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundl/Vundle.vim
-	echo "already install vundle \n" >$LOG_FILE
+fi
+if [ ! -f ~/.vim/bundle/Vundle.vim ]; then
+	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	echo "already install vundle \n" >>$LOG_FILE
 fi
 
 # theme
@@ -41,21 +43,21 @@ if [ ! -d ~/.vim/colors ]; then
 	git clone https://github.com/sickill/vim-monokai
 	mv vim-monokai/colors/monokai.vim ~/.vim/colors
 	rm -rf vim-monokai
-	echo "install monokai theme \n" >$LOG_FILE
+	echo "install monokai theme \n" >>$LOG_FILE
 fi
 
 # install C++ pkg
 $PKG_MANAGER install -y build-essential 
-echo "install C++ pkg \n" > $LOG_FILE
+echo "install C++ pkg \n" >> $LOG_FILE
 
 # install python pkg
 $PKG_MANAGER install -y python-pip python-dev
 sudo pip install virtualenv
-echo "install python pkg \n" >$LOG_FILE
+echo "install python pkg \n" >>$LOG_FILE
 
 # install ngnix
 $PKG_MANAGER install -y nginx
-echo "have install nginx pkg already \n" >$LOG_FILE
+echo "have install nginx pkg already \n" >>$LOG_FILE
 
 # install mysql
 $PKG_MANAGER install -y mysql-server
