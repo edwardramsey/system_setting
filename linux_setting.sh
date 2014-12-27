@@ -25,7 +25,7 @@ else
 	git clone https://github.com/edwardramsey/system-setting/linux_vim/.vimrc 
 	mv ~/system-setting/linux_vim/.vimrc ~/
 	rm -rf system-setting/
-	echo "already istall .vimrc \n" >>$LOG_FILE
+	echo "already install .vimrc \n" >>$LOG_FILE
 fi
 
 # use vundle to manage vim plugin
@@ -34,7 +34,7 @@ if [ ! -d ~/.vim/bundle ]; then
 fi
 if [ ! -f ~/.vim/bundle/Vundle.vim ]; then
 	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	echo "already install vundle \n" >>$LOG_FILE
+	echo "install vundle already\n" >>$LOG_FILE
 fi
 
 # theme
@@ -43,7 +43,7 @@ if [ ! -d ~/.vim/colors ]; then
 	git clone https://github.com/sickill/vim-monokai
 	mv vim-monokai/colors/monokai.vim ~/.vim/colors
 	rm -rf vim-monokai
-	echo "install monokai theme \n" >>$LOG_FILE
+	echo "install monokai theme already\n" >>$LOG_FILE
 fi
 
 # install C++ pkg
@@ -57,10 +57,11 @@ echo "install python pkg \n" >>$LOG_FILE
 
 # install ngnix
 $PKG_MANAGER install -y nginx
-echo "have install nginx pkg already \n" >>$LOG_FILE
+echo "install nginx pkg already \n" >>$LOG_FILE
 
 # install mysql
 $PKG_MANAGER install -y mysql-server
+echo "install mysql-server pkg already \n" >>$LOG_FILE
 
 
 
