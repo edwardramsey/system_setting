@@ -38,13 +38,13 @@ if [ ! -f ~/.vim/bundle/Vundle.vim ]; then
 fi
 
 # theme
-if [ ! -d ~/.vim/colors ]; then
-	mkdir -p ~/.vim/colors
-	git clone https://github.com/sickill/vim-monokai
-	mv vim-monokai/colors/monokai.vim ~/.vim/colors
-	rm -rf vim-monokai
-	echo "install monokai theme already\n" >>$LOG_FILE
-fi
+#if [ ! -d ~/.vim/colors ]; then
+#	mkdir -p ~/.vim/colors
+#	git clone https://github.com/sickill/vim-monokai
+#	mv vim-monokai/colors/monokai.vim ~/.vim/colors
+#	rm -rf vim-monokai
+#	echo "install monokai theme already\n" >>$LOG_FILE
+#fi
 
 # install C++ pkg
 $PKG_MANAGER install -y build-essential 
