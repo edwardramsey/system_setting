@@ -1,21 +1,40 @@
-system-setting
+system_setting
 ==============
 ##Intro
-a file prepared for my work environment
+files prepared for my work environment
 
-I prefer using MacOS and a linux in Digital Ocean together.
+I prefer using MacOS and a linux(VPS Digital Ocean and Aliyun) together.
 
 ## Linux setting file 
 linux_setting.sh is working for ubuntu and CentOS 
 
 I hope it could install vim, C++, python, mysql and nginx automactically
 
+## SSH Tool 
+this is one I copy code from others's blog before.
+
+add target ssh machine to the list and decrease typing hostname time.
+
+## Vim Theme
+a same theme file may show different colors. for my terminal I use Monokai and it seems can't work with Solarized theme well together. so I adjust a Monokai vim theme file for my own terminal and iTerm2
+
+just like this kind:
+```
+highlight Comment cterm=underline ctermbg=Blue ctermfg=White
+```
+reference:
+[sickill/Monokai](https://github.com/sickill/vim-monokai/blob/master/colors/monokai.vim)
+
+[rickharris/Monokai](https://github.com/rickharris/vim-monokai/blob/master/colors/monokai.vim)
+
+sickill'theme is more popular, but I don't like the background.
+
 ##.vimrc配置 .vimrc Setting
 .vimrc setting is suitable for my Mac C++ programming environment.
 
-这是我的.vimrc 配置文件，主要用来做C++方面的一些开发，弄了一天多，现在顺眼多了。
+这是我的.vimrc 配置文件，主要用来做C++方面的一些开发
 
-使用平台：
+**使用平台：**
 
 - MacOSX Mavericks 10.10.1
 - xcode command line tools
@@ -29,12 +48,12 @@ I use [bundle](https://github.com/gmarik/Vundle.vim) to manage my vim plugins.
 
 - Plugin `nerdtree`
 
-	[
-scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
+	[scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
 
 - Plugin 'L9'
 
 	新的vundle管理在vimscript网站里的可以直接写名字
+
 - Plugin `auto-pairs`
 
 	自动完成括号的自动补全
@@ -42,19 +61,22 @@ scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
 - Plugin `YouCompleteMe`
 	
 	代码补全跳转插件，支持C++标准库
+
 - Plugin `majutsushi/tagbar`  
 
 	显示函数、类信息，也可以使用taglist，个人比较倾向Tagbar
+
 - plugin `tcomment_vim` 
 
 	注释插件
+
 - Plugin `Lokaltog/vim-powerline`
 
 	状态栏插件，记录行数、字符编码、系统信息等
 
 - Plugin `scrooloose/syntastic` 
 
-	配合YouCompleteMe使用，纠错插件
+	配合YouCompleteMe使用，纠错插件，感觉意义不是很大
 - Plugin `kien/ctrlp.vim`
 	
 	查找文件插件
