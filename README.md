@@ -1,33 +1,33 @@
 system_setting
 ==============
 ##Intro
-files prepared for my work environment
+Files prepared for my work environment
 
-I prefer using MacOS and a linux(VPS Digital Ocean and Aliyun) together.
+Now I use MacOS with linux(VPS, Digital Ocean and Aliyun) together.
 
 ## Linux setting file 
-linux_setting.sh is working for ubuntu and CentOS 
-
-I hope it could install vim, C++, python, mysql and nginx automactically
+linux_setting.sh is designed for ubuntu and CentOS to install vim, C++, python, mysql and nginx automactically
 
 ## SSH Tool 
-this is one I copy code from others's blog before.
+This is a tool which I copy code from others's blog before.
 
-add target ssh machine to the list and decrease typing hostname time.
+add target ssh machine to the list and decrease typing hostnames time.
 
 ## Vim Theme
-a same theme file may show different colors. for my terminal I use Monokai and it seems can't work with Solarized theme well together. so I adjust a Monokai vim theme file for my own terminal and iTerm2
+A same theme file may show different colors. for my terminal I use Monokai and it seems can't work with Solarized theme well together. so I adjust a Monokai vim theme file for my own terminal and iTerm2
 
-just like this kind:
-```
-highlight Comment cterm=underline ctermbg=Blue ctermfg=White
-```
-reference:
+Just like this:
+	```
+	highlight Comment cterm=underline ctermbg=Blue ctermfg=White
+	```
+
+References:
+
 [sickill/Monokai](https://github.com/sickill/vim-monokai/blob/master/colors/monokai.vim)
 
 [rickharris/Monokai](https://github.com/rickharris/vim-monokai/blob/master/colors/monokai.vim)
 
-sickill'theme is more popular, but I don't like the background.
+sickill's theme is more popular, but I don't like the background.
 
 ##.vimrc配置 .vimrc Setting
 .vimrc setting is suitable for my Mac C++ programming environment.
@@ -36,7 +36,7 @@ sickill'theme is more popular, but I don't like the background.
 
 **使用平台：**
 
-- MacOSX Mavericks 10.10.1
+- MacOSX Yosemite 10.10.1
 - xcode command line tools
 - latest MacVim(7.4)
 
@@ -50,7 +50,7 @@ I use [bundle](https://github.com/gmarik/Vundle.vim) to manage my vim plugins.
 
 	[scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
 
-- Plugin 'L9'
+- Plugin `L9`
 
 	新的vundle管理在vimscript网站里的可以直接写名字
 
@@ -82,7 +82,7 @@ I use [bundle](https://github.com/gmarik/Vundle.vim) to manage my vim plugins.
 	查找文件插件
 
 
-##Tips
+##Tips for installing YouCompleteMe
 Although vundle is convenient to finish installing these plugins, there would be some problems with installing YouCompleteMe.
 
 其他的plugin只要按照vundle中的说明就可以搞定了，但是YouCompleteMe会有一些问题。
