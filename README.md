@@ -64,7 +64,7 @@ I use [bundle](https://github.com/gmarik/Vundle.vim) to manage my vim plugins.
 
 - Plugin `majutsushi/tagbar`  
 
-	显示函数、类信息，也可以使用taglist，个人比较倾向Tagbar
+	显示函数、类信息，依赖`ctags`，某些时候ctags的函数跳转比YCM好用。
 
 - plugin `tcomment_vim` 
 
@@ -76,7 +76,8 @@ I use [bundle](https://github.com/gmarik/Vundle.vim) to manage my vim plugins.
 
 - Plugin `scrooloose/syntastic` 
 
-	配合YouCompleteMe使用，纠错插件，感觉意义不是很大
+	配合YouCompleteMe使用，纠错插件，感觉意义不是很大（已不用）
+	
 - Plugin `kien/ctrlp.vim`
 	
 	查找文件插件
