@@ -32,7 +32,8 @@ set history=500
 set number
 
 "不自动换行
-set nowrap 
+" set nowrap 
+set wrap
 
 set showmatch
 
@@ -67,8 +68,10 @@ if has("gui_running")
 	set guioptions-=T  
 	set background=dark
 else
-   colorscheme monokai
-   " set t_Co=256
+	set t_Co=256
+    " colorscheme solarized
+   	" colorscheme monokai
+	colorscheme monokai_terminal
    
 endif
 "colorscheme jellybeans
@@ -189,10 +192,23 @@ let g:ycm_complete_in_comments = 1
 "map <leader>gd :GundoToggle
 
 "cscope
-set csprg=/usr/local/bin/cscope
-if filereadable("cscope.out")
-    cs add cscope.out
+if has("cscope")
+	set csprg=/usr/local/bin/cscope
+	"search not only in ctags and cscope database
+	set cst
+	"cscope和ctags的执行顺序，默认0，cscope优先
+	set csto=0
+
+	if filereadable("cscope.out")
+		cs add cscope.out
+	elseif $CSCOPE_DB != ""
+		cs add $CSCOPE_DB
+	endif
 endif
+"nmap <leader>s :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>s :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+
 
 "UltiSnips
 let g:UltiSnipsExpandTrigger ="<c-n>"

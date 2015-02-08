@@ -60,11 +60,11 @@ I use [bundle](https://github.com/gmarik/Vundle.vim) to manage my vim plugins.
 
 - Plugin `YouCompleteMe`
 	
-	代码补全跳转插件，支持C++标准库
+	代码补全跳转插件，支持C++标准库，[地址](https://github.com/Valloric/YouCompleteMe)，但某些时候，某些时候ctags的函数跳转比YCM好用。
 
 - Plugin `majutsushi/tagbar`  
 
-	显示函数、类信息，依赖`ctags`，某些时候ctags的函数跳转比YCM好用。
+	显示函数、类信息，依赖`ctags`。
 
 - plugin `tcomment_vim` 
 
@@ -110,4 +110,37 @@ Although vundle is convenient to finish installing these plugins, there would be
   	`echo | clang -std=c++11 -stdlib=libc++ -v -E -x c++ -`
   	
   	[参考文章：YouCompleteMe安装遇到的问题及解决办法](http://blog.marchtea.com/archives/175)
+
+
+##cscope 配置
+	cscope是一个很好查询函数等的插件
+	配置cscope会遇到路径的文件，即cs add path 之后找不到文件
+	解决办法：
+	在/usr/local/bin路径下写一个cscopemake.sh的脚本:
+	```
+	#!/bin/sh
+	usage(){
+		echo "Usage: cscopemake.sh src_path project_name"
+	}
+
+	if [ $# -ne 2 ];then
+		usage
+		exit
+	fi
+	SRC_PATH=$1
+	# set CSCOPE_DB (set in .bash_peofile) = CSCOPE_PATH
+	CSCOPE_PATH=~/cscope/$2
+
+	mkdir -p $CSCOPE_PATH
+	cd $CSCOPE_PATH
+	find $SRC_PATH -name "*.h" -o -name "*.c" -o -name "*.cpp" > cscope.files
+	cscope -bkq -i ./cscope.files
+	```
+	[参考文章](http://www.dreamingo.com:9999/blog/vim-cscope-handle-project)
+
+
+
+
+
+
 
