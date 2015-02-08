@@ -42,7 +42,7 @@ fi
 if [ ! -d ~/.vim/colors ]; then
 	mkdir -p ~/.vim/colors
 	mv ~/system_setting/theme/monokai_terminal.vim ~/.vim/colors
-	echo "install monokai theme already\n" >>$LOG_FILE
+	echo "install own monokai theme already\n" >>$LOG_FILE
 fi
 
 # install C++ pkg
@@ -57,6 +57,16 @@ echo "install python pkg \n" >>$LOG_FILE
 # install ngnix
 $PKG_MANAGER install -y nginx
 echo "install nginx pkg already \n" >>$LOG_FILE
+
+# install apache
+# Apache2 is available as a CentOS package
+if [ command -v yum ]; then
+	yum -y install httpd
+fi
+if [command -v apt-get]; then
+	$PKG_MANAGER install -y apache2
+fi
+echo "install apache2 already\n" >> $LOG_FILE
 
 # install mysql
 $PKG_MANAGER install -y mysql-server
