@@ -114,9 +114,13 @@ Although vundle is convenient to finish installing these plugins, there would be
 
 ##cscope 配置
 	cscope是一个很好查询函数等的插件
+
 	配置cscope会遇到路径的文件，即cs add path 之后找不到文件
+
 	解决办法：
+
 	在/usr/local/bin路径下写一个cscopemake.sh的脚本:
+
 	```
 	#!/bin/sh
 	usage(){
@@ -136,6 +140,7 @@ Although vundle is convenient to finish installing these plugins, there would be
 	find $SRC_PATH -name "*.h" -o -name "*.c" -o -name "*.cpp" > cscope.files
 	cscope -bkq -i ./cscope.files
 	```
+
 	[参考文章](http://www.dreamingo.com:9999/blog/vim-cscope-handle-project)
 
 
