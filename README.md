@@ -1,11 +1,11 @@
 system_setting
 ==============
 ##Intro
-Files prepared for my work environment
+Files prepared for work environment
 
 Now I use MacOS with linux(VPS, Digital Ocean and Aliyun) together.
 
-## Linux setting file 
+## Linux setting files
 linux_setting.sh is designed for ubuntu and CentOS to install vim, C++, python, mysql and nginx automactically
 
 ## SSH Tool 
@@ -14,7 +14,7 @@ This is a tool which I copy code from others's blog before.
 add target ssh machine to the list and decrease typing hostnames time.
 
 ## Vim Theme
-A same theme file may show different colors. for my terminal I use Monokai and it seems can't work with Solarized theme well together. so I adjust a Monokai vim theme file for my own terminal and iTerm2
+A same theme file may show different colors in different terminals. For my terminal I use Monokai and it seems can't work with Solarized theme well together. so I adjust a Monokai vim theme file for my own terminal and iTerm2.
 
 Just like this:
 	```
@@ -30,9 +30,9 @@ References:
 sickill's theme is more popular, but I don't like the background.
 
 ##.vimrc配置 .vimrc Setting
-.vimrc setting is suitable for my Mac C++ programming environment.
+`.vimrc` setting is mainly for my C++ programming environment.
 
-这是我的.vimrc 配置文件，主要用来做C++方面的一些开发
+这是我的`.vimrc` 配置文件，主要用来做C++方面的一些开发
 
 **使用平台：**
 
@@ -45,6 +45,8 @@ I use [bundle](https://github.com/gmarik/Vundle.vim) to manage my vim plugins.
 我用 [bundle](https://github.com/gmarik/Vundle.vim)来管理我的vim的插件
 
 几个觉得比较好用的插件：
+
+Some awesome plugins in vim:
 
 - Plugin `nerdtree`
 
@@ -113,35 +115,39 @@ Although vundle is convenient to finish installing these plugins, there would be
 
 
 ##cscope 配置
-	cscope是一个很好查询函数等的插件
+cscope是一个很好查询函数等的插件
 
-	配置cscope会遇到路径的文件，即cs add path 之后找不到文件
+配置cscope会遇到路径的文件，即cs add path 之后找不到文件，因为在项目目录中生成的是相对路径
 
-	解决办法：
+解决办法：
 
-	在/usr/local/bin路径下写一个cscopemake.sh的脚本:
+在/usr/local/bin路径下写一个cscopemake.sh的脚本:
 
-	```
-	#!/bin/sh
-	usage(){
-		echo "Usage: cscopemake.sh src_path project_name"
-	}
 
-	if [ $# -ne 2 ];then
-		usage
+```
+#!/bin/sh
+usage(){
+	echo "Usage: cscopemake.sh src_path project_name"
+}
+
+if [ $# -ne 2 ];then
+	usage
 		exit
-	fi
-	SRC_PATH=$1
-	# set CSCOPE_DB (set in .bash_peofile) = CSCOPE_PATH
-	CSCOPE_PATH=~/cscope/$2
+fi
+SRC_PATH=$1
+# set CSCOPE_DB (set in .bash_peofile) = CSCOPE_PATH
+CSCOPE_PATH=~/cscope/$2
+mkdir -p $CSCOPE_PATH
+cd $CSCOPE_PATH
 
-	mkdir -p $CSCOPE_PATH
-	cd $CSCOPE_PATH
-	find $SRC_PATH -name "*.h" -o -name "*.c" -o -name "*.cpp" > cscope.files
-	cscope -bkq -i ./cscope.files
-	```
+find $SRC_PATH -name "*.h" -o -name "*.c" -o -name "*.cpp" > cscope.files
+cscope -bkq -i ./cscope.files
 
-	[参考文章](http://www.dreamingo.com:9999/blog/vim-cscope-handle-project)
+```
+
+[参考文章1:Vim + cscope handle大型C++项目](http://www.dreamingo.com:9999/blog/vim-cscope-handle-project)
+
+[参考文章2：使用vim看代码：cscope ](http://blog.chinaunix.net/uid-10319840-id-3653097.html)
 
 
 
