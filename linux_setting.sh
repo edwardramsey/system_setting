@@ -73,5 +73,12 @@ $PKG_MANAGER install -y mysql-server
 echo "install mysql-server pkg already \n" >>$LOG_FILE
 
 
-
+# add alias
+if [ -d /alias ]; then
+	echo "add alias to the .bashrc"
+	cp /alias/my_own_alias.sh ~/.bash_my_alias
+	if [ -f ~/.bashrc ]; then
+		echo 'source ~/.bash_my_alias' >> ~/.bashrc
+	fi
+fi
 
