@@ -1,4 +1,6 @@
 #!/bin/bash
+# This a bash script to configurate your Linux
+
 PKG_MANAGER=$( command -v yum || command -v apt-get || echo "no pkgManager")
 LOG_FILE="config.log"
 
