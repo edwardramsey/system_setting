@@ -12,6 +12,7 @@ else
 	fi
 fi
 
+
 $PKG_MANAGER update -y
 $PKG_MANAGER upgrage -y
 
