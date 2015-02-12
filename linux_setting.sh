@@ -55,8 +55,9 @@ sudo pip install virtualenv
 echo "install python pkg \n" >>$LOG_FILE
 
 # install ngnix
-$PKG_MANAGER install -y nginx
-echo "install nginx pkg already \n" >>$LOG_FILE
+# download the code from website and configurate it
+# $PKG_MANAGER install -y nginx
+# echo "install nginx pkg already \n" >>$LOG_FILE
 
 # install apache
 # Apache2 is available as a CentOS package
