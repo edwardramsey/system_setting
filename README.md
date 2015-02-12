@@ -3,7 +3,7 @@ system_setting
 ##Intro
 Files prepared for work environment
 
-Now I use MacOS with linux(VPS, Digital Ocean and Aliyun) together.
+With this I can use MacOS with linux(VPS, Digital Ocean and Aliyun) together.
 
 ## Linux setting files
 linux_setting.sh is designed for ubuntu and CentOS to install vim, C++, python, mysql and nginx automactically
