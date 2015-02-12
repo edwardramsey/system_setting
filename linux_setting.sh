@@ -60,7 +60,7 @@ echo "install python pkg \n" >>$LOG_FILE
 # echo "install nginx pkg already \n" >>$LOG_FILE
 
 # install apache
-# Apache2 is available as a CentOS package
+# Apache2 is available as a CentOS package called httpd, in ubuntu is apache2
 if [ command -v yum ]; then
 	yum -y install httpd
 fi
