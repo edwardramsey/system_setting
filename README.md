@@ -1,7 +1,7 @@
 system_setting
 ==============
 ##Intro
-Files prepared for work environment
+Files prepared for work environment.
 
 With this I can use MacOS with linux(VPS, Digital Ocean and Aliyun) together.
 
