@@ -56,7 +56,7 @@ set hlsearch
 set tabstop=4  
 set shiftwidth=4  
   
-colorscheme monokai
+colorscheme monokai_terminal
 
 "总是显示状态栏
 set laststatus=2
