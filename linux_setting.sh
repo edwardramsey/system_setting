@@ -75,6 +75,11 @@ echo "install apache2 already\n" >> $LOG_FILE
 $PKG_MANAGER install -y mysql-server
 echo "install mysql-server pkg already \n" >>$LOG_FILE
 
+# setting zsh
+# apt-get install zsh
+# wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+# chsh -s `which zsh`
+
 
 # add alias
 if [ -d /alias ]; then
