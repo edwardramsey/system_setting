@@ -124,7 +124,9 @@ init(){
 	$PKG_MANAGER upgrage -y
 	PKG_INSTALL=$PKG_MANAGER" install -y"
 
-	if [ ! id zabbix ];then
+	if [ id zabbix ];then
+		LOG "exist user zabbix"
+	else
 		groupadd zabbix
 		useradd -g zabbix zabbix
 	fi

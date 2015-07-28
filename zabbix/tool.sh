@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PKG_INSTALL=yum install -y
+PKG_INSTALL="yum install -y"
 
 $PKG_INSTALL epel-release
 $PKG_INSTALL tmux
@@ -35,11 +35,19 @@ $PKG_INSTALL vim
 $PKG_INSTALL wget
 $PKG_INSTALL gcc
 
-cat >>/root/.vimrc << "EOF"
+if [ -d ~/.vim/bundle ];then
+	mkdir -p ~/.vim/bundle
+fi
+
+if [ ! -f ~/.vim/bundle/Vundle.vim ]; then
+	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+fi
+
+cat >/root/.vimrc << "EOF"
 set nocompatible
 filetype off
 syntax enable
-syntax on  
+syntax on
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936,big5,utf-16
 set number
@@ -54,8 +62,8 @@ set smartindent
 set cindent
 set incsearch
 set hlsearch
-set tabstop=4  
-set shiftwidth=4  
+set tabstop=4
+set shiftwidth=4
 set laststatus=2
 let mapleader = ","
 "move block easier
@@ -93,10 +101,9 @@ nmap <C-K> <C-W>k
 "control+l进入右边的窗口
 nmap <C-L> <C-W>l  
  
-" 恢复上次文件打开位置  
-set viminfo='10,\"100,:20,%,n~/.viminfo  
+" 恢复上次文件打开位置
+set viminfo='10,\"100,:20,%,n~/.viminfo
 au BufReadPost * if line("'\"") > 0|if line("'\"") <=line("$")| exe("norm '\"")|else|exe "norm $" |endif|endif
-
 EOF
 
 vim +PluginInstall +qall
