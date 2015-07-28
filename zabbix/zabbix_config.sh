@@ -1,32 +1,35 @@
 #!/bin/bash
-#############################################################
+####################################################################
 #
 #   @author edward Chen
 #	Zabbix configuration for CentOS 6.5
 #
-#	server-proxy-agent
-#zabbix server与proxy需要数据库，angent不需要
-#proxy只需要导入一个sql文件，而server一共要导入3个sql文件
+#	server-proxy-agent install program
 #
-#############################################################
+#	usage: zabbix_config.sh -p/-a/-s (proxy/agent/server)
+#
+#	tips:
+#		zabbix server and proxy need database while agent needn't
+#		proxy just need import schema.sql while others need all
+#
+####################################################################
 
 LOG_FILE="/root/config_zabbix.log"
 DB_USER="root"
 DB_PASSWORD="cyq1018"
-ZABBIX_SEVER_DIR="zabbix_server"
-ZABBIX_AGENT_DIR="zabbix_agent"
-ZABBIX_PROXY_DIR="zabbix_proxy"
+INSTALL_DIR="/usr/local/zabbix"
 ZABBIX_URL="http://downloads.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/2.2.2/zabbix-2.2.2.tar.gz"
+TAG_NGINX_CONF=/root/system_setting/zabbix/nginx.conf
 
 LOG(){
 	echo $1 >> $LOG_FILE
 }
 
 download_zabbix(){
-	cd /usr/local/src
 	if [ ! -f zabbix*.tar.gz ]; then
 		wget $ZABBIX_URL
 		tar -xzvf zabbix*.tar.gz
+		rm ./*.tar.gz
 	fi
 
 	LOG "download zabbix" 
@@ -35,23 +38,25 @@ download_zabbix(){
 configure_server(){
 	LOG "install zabbix server"
 
-	./configure --prefix=/usr/local/$ZABBIX_DIR/ --enable-server \
+	./configure --prefix=$INSTALL_DIR --enable-server \
 		--enable-agent --with-mysql --with-net-snmp --with-libcurl --with-libxml2
-	make&&make install	
+	make install	
 
 	mysql -u$DB_USER -p$DB_PASSWORD zabbix < database/mysql/schema.sql
 	mysql -u$DB_USER -p$DB_PASSWORD zabbix < database/mysql/images.sql
 	mysql -u$DB_USER -p$DB_PASSWORD zabbix < database/mysql/data.sql
 
-	sed -i "s/# DBName=/DBName=zabbix/" $ZABBIX_SERVER_DIR/etc/zabbix_server.conf
-	sed -i "s/# DBUser=/DBUser=$DB_USER/" $ZABBIX_SERVER_DIR/etc/zabbix_server.conf
-	sed -i "s/# DBPassword=/DBPassword=$DB_PASSWORD/" $ZABBIX_SERVER_DIR/etc/zabbix_server.conf
-	sed -i "s/# DBPort=/DBPort=3306/" $ZABBIX_SERVER_DIR/etc/zabbix_server.conf
-	$ZABBIX_SERVER_DIR/sbin/zabbix_server
+	sed -i "s/# DBName=/DBName=zabbix/" $INSTALL_DIR/etc/zabbix_server.conf
+	sed -i "s/# DBUser=/DBUser=$DB_USER/" $INSTALL_DIR/etc/zabbix_server.conf
+	sed -i "s/# DBPassword=/DBPassword=$DB_PASSWORD/" $INSTALL_DIR/etc/zabbix_server.conf
+	sed -i "s/# DBPort=/DBPort=3306/" $INSTALL_DIR/etc/zabbix_server.conf
+	$INSTALL_DIR/sbin/zabbix_server
 
 	COUNT=`ps -ef|grep zabbix_server|grep -v grep|wc -l`
 	if [ $COUNT -eq 1 ]; then
 		LOG "install zabbix server OK"
+	else
+		LOG "######### install zabbix server error ##########" 
 	fi
 
 	$PKG_INSTALL nginx
@@ -64,12 +69,12 @@ configure_server(){
 		exit
 	fi
 
-	cp -rp /usr/local/src/$ZABBIX_DIR/frontends/php/* /usr/share/nginx/zabbix
+	cp -rp /usr/local/src/zabbix*/frontends/php/* /usr/share/nginx/zabbix
 
-	#### modify /etc/nginx/nginx.conf
-	echo "###############################################################"
-	echo "############ please modify your nginx.conf file ##############"
-	echo "###############################################################"
+	# modify /etc/nginx/nginx.conf
+	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
+	mv $TAG_NGINX_CONF /etc/nginx/nginx.conf
+	service nginx restart
 
 	# modify /etc/php.ini
 	sed -i "s/;date.timezone =/date.timezone PRC/g" /etc/php.ini
@@ -132,6 +137,7 @@ init(){
 	fi
 
 	./tool.sh
+	config_mysql
 }
 
 
@@ -150,13 +156,18 @@ EOF
 }
 
 
-init 
-# if [ $1 == "server" ]; then
-# 		
-# elif [ $1 == "proxy" ]; then
-# 	
-# else
-# 	
-# fi
-
-
+while getopts 'sap' ARG;do
+	case $ARG in
+		s)
+			init
+			cd /usr/local/src
+			download_zabbix
+			cd zabbix*
+			configure_server
+			;;
+		a)
+			init;;
+		p)
+			init;;
+	esac
+done
