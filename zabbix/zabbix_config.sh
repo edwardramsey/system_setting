@@ -38,10 +38,12 @@ download_zabbix(){
 
 configure_server(){
 	LOG "install zabbix server"
+	
+	$PKG_INSTALL net-snmp-devel libxml2-devel libcurl-devel
 
 	./configure --prefix=$INSTALL_DIR --enable-server \
 		--enable-agent --with-mysql --with-net-snmp --with-libcurl --with-libxml2
-	make install	
+	make&&make install	
 
 	mysql -u$DB_USER -p$DB_PASSWORD zabbix < database/mysql/schema.sql
 	mysql -u$DB_USER -p$DB_PASSWORD zabbix < database/mysql/images.sql
@@ -70,12 +72,15 @@ configure_server(){
 		exit
 	fi
 
+	mkdir -p /usr/share/nginx/zabbix
 	cp -rp /usr/local/src/zabbix*/frontends/php/* /usr/share/nginx/zabbix
 
 	# modify /etc/nginx/nginx.conf
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
-	mv $NGINX_CONF /etc/nginx/nginx.conf
+	cp $NGINX_CONF /etc/nginx/nginx.conf
 	service nginx restart
+
+	$PKG_INSTALL php-fpm php-gd php-bcmath php-xml php-mbstring php-mysql
 
 	# modify /etc/php.ini
 	sed -i "s/;date.timezone =/date.timezone PRC/g" /etc/php.ini
@@ -84,11 +89,10 @@ configure_server(){
 	sed -i "s/max_input_time = 60/max_input_time = 300/g" /etc/php.ini
 	sed -i "s/memory_limit = 128M/memory_limit = 128M/g" /etc/php.ini
 
-	$PKG_INSTALL php-fpm php-gd php-bcmath php-xml php-mbstring php-mysql
-
-	service php-fpm start
 	# modify /etc/php-fpm.d/www.conf
 	sed -i "s/listen = 127.0.0.1:9000/listen = \/var\/run\/php-fpm.sock/g" /etc/php-fpm.d/www.conf
+
+	service php-fpm start
 
 	# add php modify permission
 	chown -R nginx.nginx /usr/share/nginx/zabbix
