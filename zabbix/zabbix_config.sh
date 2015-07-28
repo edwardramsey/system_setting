@@ -19,7 +19,8 @@ DB_USER="root"
 DB_PASSWORD="cyq1018"
 INSTALL_DIR="/usr/local/zabbix"
 ZABBIX_URL="http://downloads.sourceforge.net/project/zabbix/ZABBIX%20Latest%20Stable/2.2.2/zabbix-2.2.2.tar.gz"
-TAG_NGINX_CONF=/root/system_setting/zabbix/nginx.conf
+INS_FILE_DIR=$(dirname $(readlink -f $0))
+NGINX_CONF=$INS_FILE_DIR/nginx.conf
 
 LOG(){
 	echo $1 >> $LOG_FILE
@@ -73,7 +74,7 @@ configure_server(){
 
 	# modify /etc/nginx/nginx.conf
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
-	mv $TAG_NGINX_CONF /etc/nginx/nginx.conf
+	mv $NGINX_CONF /etc/nginx/nginx.conf
 	service nginx restart
 
 	# modify /etc/php.ini
@@ -136,7 +137,7 @@ init(){
 		useradd -g zabbix zabbix
 	fi
 
-	./tool.sh
+	$INS_FILE_DIR/tool.sh
 	config_mysql
 }
 

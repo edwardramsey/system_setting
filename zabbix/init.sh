@@ -1,7 +1,6 @@
 #!/bin/bash
 
 IP=$1
-PWD=$2
 
 echo "connect to "$IP
 # sed -ig "s/$IP//g" ~/.ssh/known_hosts
